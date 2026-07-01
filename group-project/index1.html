@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance Management System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    padding:30px;
+    text-align:center;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:#1e293b;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+h1{
+    margin-bottom:20px;
+    color:#38bdf8;
+}
+
+input{
+    width:70%;
+    padding:12px;
+    margin:10px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+}
+
+button{
+    padding:12px 20px;
+    margin:10px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.present{
+    background:#22c55e;
+}
+
+.absent{
+    background:#ef4444;
+}
+
+table{
+    width:100%;
+    margin-top:30px;
+    border-collapse:collapse;
+}
+
+th, td{
+    padding:12px;
+    border:1px solid #475569;
+}
+
+th{
+    background:#334155;
+}
+
+.stats{
+    margin-top:25px;
+    font-size:20px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>College Attendance System</h1>
+
+<input type="text" id="studentName" placeholder="Enter Student Name">
+
+<br>
+
+<button class="present" onclick="markAttendance('Present')">
+Present
+</button>
+
+<button class="absent" onclick="markAttendance('Absent')">
+Absent
+</button>
+
+<table>
+
+<thead>
+<tr>
+<th>Student Name</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="attendanceTable">
+</tbody>
+
+</table>
+
+<div class="stats">
+<p>Total Classes Marked: <span id="total">0</span></p>
+<p>Present Percentage: <span id="percentage">0</span>%</p>
+</div>
+
+</div>
+
+<script>
+
+let totalClasses = 0;
+let presentCount = 0;
+
+function markAttendance(status){
+
+let student = document.getElementById("studentName").value;
+
+if(student === ""){
+    alert("Enter student name first");
+    return;
+}
+
+let table = document.getElementById("attendanceTable");
+
+let row = table.insertRow();
+
+let cell1 = row.insertCell(0);
+let cell2 = row.insertCell(1);
+
+cell1.innerHTML = student;
+cell2.innerHTML = status;
+
+totalClasses++;
+
+if(status === "Present"){
+    presentCount++;
+}
+
+let percentage = ((presentCount / totalClasses) * 100).toFixed(2);
+
+document.getElementById("total").innerHTML = totalClasses;
+document.getElementById("percentage").innerHTML = percentage;
+
+document.getElementById("studentName").value = "";
+
+}
+
+</script>
+
+</body>
+</html>
